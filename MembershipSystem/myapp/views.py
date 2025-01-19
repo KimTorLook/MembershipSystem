@@ -16,7 +16,7 @@ def listall(request):
         unit = Craftsman.objects.all().order_by('id')
     except:
         erromessage = "(erromessage)"
-    return render(request, "backstage.html", locals())
+    return render(request, "listall.html", locals())
 
 def backstage(request):
     return render(request, "backstage.html", locals())
