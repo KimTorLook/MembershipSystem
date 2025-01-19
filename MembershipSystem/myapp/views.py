@@ -11,12 +11,16 @@ def showpic(request):
     all_files = os.listdir('static\images')
     return render(request, "showpic.html", locals())
 
-def backstage(request):
+def listall(request):
     try:
-        unit = Craftsman.object.get(cName = "GonFreecss")
+        unit = Craftsman.objects.all().order_by('id')
     except:
-        erromessage = "(read Fault)"
+        erromessage = "(erromessage)"
     return render(request, "backstage.html", locals())
+
+def backstage(request):
+    return render(request, "backstage.html", locals())
+
 
 
 times = 0
