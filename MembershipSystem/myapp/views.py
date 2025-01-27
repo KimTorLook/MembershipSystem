@@ -37,3 +37,10 @@ def test(request, username):
     person =[person1, person2, person3]
     thing = [852123456789, 852987654321, "i'm using Django      ", "2017年6月13日 15:10", '', '<p>asd\n<br/>fls</p>', ]
     return render(request, "backstage.html", locals())
+
+def post(request):
+    if request.method == "POST":
+        mess=request.POST['username']
+    else:
+        mess="表單資料尚未送出！"
+    return render(request, "post.html", locals())
