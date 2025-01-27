@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from random import randint
 from myapp.models import Craftsman
@@ -44,3 +44,18 @@ def post(request):
     else:
         mess="表單資料尚未送出！"
     return render(request, "post.html", locals())
+
+def post1(request):
+    if request.method == "POST":
+        cName = request.POST["username"]
+        cSex = request.POST["sex"]
+        cBirthday = request.POST["birthday"]
+        cEmail = request.POST["email"]
+        cPhone = request.POST["phone"]
+        cAddr = request.POST["address"]
+        unit = Craftsman.objects.create(cName=cName, cSex=cSex, cBirthday=cBirthday,
+                                        cEmail=cEmail, cPhone=cPhone, cAddr=cAddr)
+        return redirect('/index/')
+    else:
+        message = '請輸入資料(資料不作驗證)'    
+    return render(request, "post1.html", locals())

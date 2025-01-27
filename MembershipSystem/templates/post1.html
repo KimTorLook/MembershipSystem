@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}<title>新增員工表 </title>{% endblock %}
+{% block content %}
+<h2>新增員工表</h2>
+<form action="." method="POST" name="form1">
+    {% csrf_token %}
+    <table border="1" cellspacing="1" cellpadding="4">
+        <tr><th>姓名</th><td><input type="text" id="username" name="username"/></td></tr>
+        <tr><th>性別</th><td><input type="radio" id="sex" name="sex" value="M" checked="checked"/>男生
+                             <input type="radio" id="sex" name="sex" value="F"/>女生</tr>
+        <tr><th>生日</th><td><input type="date" id="birthday" name="birthday" /></td></tr>
+        <tr><th>郵件</th><td><input type="email" id="email" name="email" /></td></tr>
+        <tr><th>電話</th><td><input type="tel" id="phone" name="phone" /></td></tr>
+        <tr><th>地址</th><td><input type="text" id="address" name="address" /></td></tr>
+        <tr>
+            <th colspan="2" align="center">
+            <input type="submit" value="送出">
+            <input type="reset" value="重設">
+            </th>
+        </tr>
+    </table>
+    <span style="color: red">{{message}}</span>
+
+</form>
+{% endblock %}
