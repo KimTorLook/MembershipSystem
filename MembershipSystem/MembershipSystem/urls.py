@@ -28,4 +28,5 @@ urlpatterns = [
     re_path(r'^listall/$', views.listall),
     re_path(r'^post/$', views.post),
     re_path(r'^post1/$', views.post1),
+    re_path(r'^postform/$', views.postform),
     ]
