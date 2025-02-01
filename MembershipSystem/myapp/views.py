@@ -50,12 +50,12 @@ def post1(request):  #新增資料，資料必須驗證
 	if request.method == "POST":  #如果是以POST方式才處理
 		postform = PostForm(request.POST)  #建立forms物件
 		if postform.is_valid():			#通過forms驗證
-			cName = postform.cleaned_data['username'] #取得表單輸入資料
-			cSex =  postform.cleaned_data['sex']
-			cBirthday =  postform.cleaned_data['birthday']
-			cEmail = postform.cleaned_data['email']
-			cPhone =  postform.cleaned_data['phone']
-			cAddr =  postform.cleaned_data['address']
+			cName = postform.cleaned_data['cName'] #取得表單輸入資料
+			cSex =  postform.cleaned_data['cSex']
+			cBirthday =  postform.cleaned_data['cBirthday']
+			cEmail = postform.cleaned_data['cEmail']
+			cPhone =  postform.cleaned_data['cPhone']
+			cAddr =  postform.cleaned_data['cAddr']
 			#新增一筆記錄
 			unit = Craftsman.objects.create(cName=cName, cSex=cSex, cBirthday=cBirthday, cEmail=cEmail,cPhone=cPhone, cAddr=cAddr) 
 			message = '已儲存...'
@@ -64,9 +64,26 @@ def post1(request):  #新增資料，資料必須驗證
 			message = '驗證碼錯誤！'	
 	else:
 		message = '姓名、性別、生日必須輸入！'
-		postform = PostForm()
+		postform = PostForm(request.POST)
 	return render(request, "post1.html", locals())		
 
 
 def postform(request):  #新增資料，資料必須驗證
-	return render(request, "postform.html", locals())		  
+    postform = PostForm(request.POST)
+    return render(request, "postform.html", locals())		
+
+def delete(request, id=None):
+    if id!=None:
+        if request.method == "POST":
+            id = request.POST['cId']
+        try:
+            unit=Craftsman.objects.get(id=id)
+            unit.delete()
+            return redirect('/index/')
+        except:
+            messagew = "讀取錯誤"
+    return render(request, "delete.html", locals())  
+
+def login(request):
+     
+     return render(request, "login.html", locals())
