@@ -22,7 +22,9 @@ def listall(request):
 def backstage(request):
     return render(request, "backstage.html", locals())
 
-
+#def index(request, username):
+     
+     
 
 times = 0
 def test(request, username):
@@ -83,6 +85,31 @@ def delete(request, id=None):
         except:
             messagew = "讀取錯誤"
     return render(request, "delete.html", locals())  
+
+def edit(request, id=None, mode=None):
+    if mode == "edit":
+        unit=Craftsman.objects.get(id=id)
+        unit.cName=request.GET.get('cName', unit.cName)
+        unit.cSex=request.GET.get('cName', unit.cSex)
+        unit.cBirthday=request.GET.get('cName', unit.cBirthday)
+        unit.cEmail=request.GET.get('cName', unit.cEmail)
+        unit.cPhone=request.GET.get('cName', unit.cPhone)
+        unit.cAddr=request.GET.get('cName', unit.cAddr)
+        unit.save
+        messagew = "己修改..."
+        return redirect('/index/')
+    else:
+        try:
+            unit = Craftsman.objects.get(id=id)
+            strdate=str(unit.cBirthday)
+            strdate2=strdate.replace("年","-")
+            strdate2=strdate.replace("月","-")
+            strdate2=strdate.replace("日","-")
+            unit.cBirthday = strdate2
+        except:
+            message = "此id不存在!"
+        return render(request, "edit.html", locals())
+            
 
 def login(request):
      
