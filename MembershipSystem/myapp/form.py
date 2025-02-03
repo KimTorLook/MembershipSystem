@@ -1,6 +1,7 @@
 from django import forms
 
 class PostForm(forms.Form):
+    cId = forms.CharField(max_length=2, initial='')
     cName = forms.CharField(max_length=20, initial='')
     cSex = forms.CharField(max_length=2, initial='M')
     cBirthday = forms.DateField()

@@ -5,14 +5,12 @@
 <form action="." method="POST" name="form1">
     {% csrf_token %}
     <table border="1" cellspacing="0" cellpadding="4">
-        <tr><th >姓名</th><td >{{postform.cName}}</td></tr>
-        <tr>
-          <th>性別</th>
-          <td >
+        <tr><th>ID</th><td>{{postform.cId}}</td></tr>
+        <tr><th>姓名</th><td>{{postform.cName}}</td></tr>
+        <tr><th>性別</th><td>
             <input name="cSex" type="radio" id="cSex1" value="M" checked="checked" />男生
             <input name="cSex" type="radio" id="cSex2" value="F" />女生
-          </td>
-        </tr>
+          </td></tr>
         <tr><th>生日</th><td>{{postform.cBirthday}}</td></tr>
         <tr><th>郵件帳號</th><td>{{postform.cEmail}}</td></tr>
         <tr><th>電話</th><td >{{postform.cPhone}}</td></tr>

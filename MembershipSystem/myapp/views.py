@@ -45,6 +45,7 @@ def test(request, username):
     thing = [852123456789, 852987654321, "i'm using Django      ", "2017年6月13日 15:10", '', '<p>asd\n<br/>fls</p>', ]
     return render(request, "backstage.html", locals())
 
+
 def post(request):
     if request.method == "POST":
         mess=request.POST['username']
@@ -52,31 +53,33 @@ def post(request):
         mess="表單資料尚未送出！"
     return render(request, "post.html", locals())
 
-def post1(request):  #新增資料，資料必須驗證
-	if request.method == "POST":  #如果是以POST方式才處理
-		postform = PostForm(request.POST)  #建立forms物件
-		if postform.is_valid():			#通過forms驗證
-			cName = postform.cleaned_data['cName'] #取得表單輸入資料
-			cSex =  postform.cleaned_data['cSex']
-			cBirthday =  postform.cleaned_data['cBirthday']
-			cEmail = postform.cleaned_data['cEmail']
-			cPhone =  postform.cleaned_data['cPhone']
-			cAddr =  postform.cleaned_data['cAddr']
-			#新增一筆記錄
-			unit = Craftsman.objects.create(cName=cName, cSex=cSex, cBirthday=cBirthday, cEmail=cEmail,cPhone=cPhone, cAddr=cAddr) 
-			message = '已儲存...'
-			return redirect('/index/')	
-		else:
-			message = '驗證碼錯誤！'	
-	else:
-		message = '姓名、性別、生日必須輸入！'
-		postform = PostForm(request.POST)
-	return render(request, "post1.html", locals())		
+
+def post1(request):
+    if request.method == "POST":
+        postform = PostForm(request.POST)
+        if postform.is_valid():
+            cId = postform.cleaned_data['cId']
+            cName = postform.cleaned_data['cName']
+            cSex = postform.cleaned_data['cSex']
+            cBirthday = postform.cleaned_data['cBirthday']
+            cEmail = postform.cleaned_data['cEmail']
+            cPhone = postform.cleaned_data['cPhone']
+            cAddr = postform.cleaned_data['cAddr']
+            unit=Craftsman.objects.create(cId=cId, cName=cName, cSex=cSex, cBirthday=cBirthday, cEmail=cEmail, cPhone=cPhone, cAddr=cAddr)
+            message = "己儲存..."
+            return redirect('/index/')
+        else:
+            message = "驗證碼錯誤！"
+    else:
+        message = "姓名、性別、生日必須輸入！"
+        postform = PostForm(request.POST)
+    return render(request, "post1.html", locals())
 
 
 def postform(request):  #新增資料，資料必須驗證
     postform = PostForm(request.POST)
     return render(request, "postform.html", locals())		
+
 
 def delete(request, id=None):
     if id!=None:
@@ -89,6 +92,7 @@ def delete(request, id=None):
         except:
             messagew = "讀取錯誤"
     return render(request, "delete.html", locals())  
+
 
 def edit(request, id=None, mode=None):
     if mode == "edit":
@@ -118,3 +122,4 @@ def edit(request, id=None, mode=None):
 def login(request):
      
      return render(request, "login.html", locals())
+
