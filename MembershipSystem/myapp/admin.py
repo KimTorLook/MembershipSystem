@@ -4,9 +4,9 @@ from myapp.models import Craftsman
 #admin.site.register(Craftsman)
 
 class CraftsmanAdmin(admin.ModelAdmin):
-    list_display=('id','cName','cSex','cBirthday','cEmail','cPhone','cAddr')
+    list_display=('cId','cName','cSex','cBirthday','cEmail','cPhone','cAddr')
     list_filter=('cName','cSex')
     search_fields=('cName',)
-    ordering=('id',)
+    ordering=('cId',)
 
 admin.site.register(Craftsman,CraftsmanAdmin)

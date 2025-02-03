@@ -1,6 +1,7 @@
 from django.db import models
 
 class Craftsman(models.Model):
+    cId = models.PositiveIntegerField(primary_key=False)
     cName = models.CharField(max_length=20, null=False)
     cSex = models.CharField(max_length=2, default='M', null=False)
     cBirthday = models.DateField(null=False)

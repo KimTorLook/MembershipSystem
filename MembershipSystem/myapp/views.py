@@ -8,6 +8,10 @@ from myapp.form import PostForm
 def sayhello(request):
     return HttpResponse("Hello Django!")
 
+def index(request, id=None):
+    craftsman = Craftsman.objects.all().order_by('id')
+    return render(request, "index.html", locals())
+
 def showpic(request):
     all_files = os.listdir('static\images')
     return render(request, "showpic.html", locals())

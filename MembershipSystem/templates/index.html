@@ -7,16 +7,17 @@
     <table border="1" cellspacing="0" cellpadding="4">
         <tr><th>編號</th><th>姓名</th><th>性別</th><th>生日</th><th>郵件帳號</th>
             <th>電話</th><th>地址</th><th>編輯</th></tr>
-        {% for {{Craftsmans}} in {{Craftsman}} %}
-        <tr><td >{{Craftsmans.cId}}</td><td >{{Craftsmans.cName}}</td><td >{{Craftsmans.cSex}}</td>
+        {% for Craftsmans in craftsman %}
+        <tr><td >{{unit}}</td><td >{{Craftsmans.cName}}</td><td >{{Craftsmans.cSex}}</td>
         <td>{{Craftsmans.cBirthday}}</td><td>{{Craftsmans.cEmail}}</td><td >{{Craftsmans.cPhone}}</td>
         <td >{{Craftsmans.cAddr}}</td>            
             <td>
                 <a href="/post1/">編輯一</a>
                 <a href="/post1/">編輯二</a>
-                <a href="/delete/">刪除</a>
+                <a href="/delete/{{Craftsmans.id}}/">刪除</a>
             </td>
         </tr>
+        {% endfor %}
     </table>
 </form>
 {% endblock %}

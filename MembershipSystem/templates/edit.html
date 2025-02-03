@@ -1,7 +1,9 @@
 {% extends "base.html"%}
 {% block title %}<title>資料表修改</title>{% endblock %}
 {% block content %}
-<form action="/edit/{{unit.id}}/" method="GET" name="form1">
+<h2>員工資料修改</h2>
+<form action="/edit/{{unit.id}}/edit/" method="POST" name="form1">
+    {% csrf_token %}    
     <table border="1" cellspacing="1" cellpadding="4">
         <tr><th >姓名</th><td ><input type="text" id="cName" name="cName" value={{unit.cName}}></td></tr>
           <th>性別</th>
