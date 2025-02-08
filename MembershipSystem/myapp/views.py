@@ -9,7 +9,7 @@ def sayhello(request):
     return HttpResponse("Hello Django!")
 
 def index(request, id=None):
-    craftsman = Craftsman.objects.all().order_by('id')
+    craftsman = Craftsman.objects.all().order_by('cId')
     return render(request, "index.html", locals())
 
 def showpic(request):
@@ -96,19 +96,19 @@ def delete(request, id=None):
 
 def edit(request, id=None, mode=None):
     if mode == "edit":
-        unit=Craftsman.objects.get(id=id)
+        unit=Craftsman.objects.get(cId=id)
         unit.cName=request.GET.get('cName', unit.cName)
-        unit.cSex=request.GET.get('cName', unit.cSex)
-        unit.cBirthday=request.GET.get('cName', unit.cBirthday)
-        unit.cEmail=request.GET.get('cName', unit.cEmail)
-        unit.cPhone=request.GET.get('cName', unit.cPhone)
-        unit.cAddr=request.GET.get('cName', unit.cAddr)
-        unit.save
+        unit.cSex=request.GET.get('cSex', unit.cSex)
+        unit.cBirthday=request.GET.get('cBirthday', unit.cBirthday)
+        unit.cEmail=request.GET.get('cEmail', unit.cEmail)
+        unit.cPhone=request.GET.get('cPhone', unit.cPhone)
+        unit.cAddr=request.GET.get('cAddr', unit.cAddr)
+        unit.save()
         messagew = "己修改..."
         return redirect('/index/')
     else:
         try:
-            unit = Craftsman.objects.get(id=id)
+            unit = Craftsman.objects.get(cId=id)
             strdate=str(unit.cBirthday)
             strdate2=strdate.replace("年","-")
             strdate2=strdate.replace("月","-")
@@ -117,6 +117,10 @@ def edit(request, id=None, mode=None):
         except:
             message = "此id不存在!"
         return render(request, "edit.html", locals())
+    
+def edit2(request, id=None, mode=None):
+        return render(request, "edit.html", locals())
+
             
 
 def login(request):
