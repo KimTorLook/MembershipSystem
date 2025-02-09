@@ -1,23 +1,24 @@
 {% extends "base.html" %}
 {% block title %}<title>新增員工表 </title>{% endblock %}
 {% block content %}
-<h2>顯示資料表所有資料 <a href="/post1/">新增</a></h2>
-<form action="." method="GET" name="form1">
+<h2>顯示資料表所有資料 <a href="/post1/">新增員工</a></h2>
+<form action="." method="POST" name="form1">
     {% csrf_token %}
     <table border="1" cellspacing="0" cellpadding="4">
         <tr><th>編號</th><th>姓名</th><th>性別</th><th>生日</th><th>郵件帳號</th>
             <th>電話</th><th>地址</th><th>編輯</th></tr>
-        {% for Craftsmans in craftsman %}
-        <tr><td >{{Craftsmans.cId}}</td><td >{{Craftsmans.cName}}</td><td >{{Craftsmans.cSex}}</td>
-        <td>{{Craftsmans.cBirthday}}</td><td>{{Craftsmans.cEmail}}</td><td >{{Craftsmans.cPhone}}</td>
-        <td >{{Craftsmans.cAddr}}</td>            
+        {% for unit in craftsman %}
+        <tr><td >{{unit.cId}}</td><td >{{unit.cName}}</td><td >{{unit.cSex}}</td>
+        <td>{{unit.cBirthday}}</td><td>{{unit.cEmail}}</td><td >{{unit.cPhone}}</td>
+        <td >{{unit.cAddr}}</td>            
             <td>
-                <a href="/edit/{{Craftsmans.cId}}/">編輯一</a>
-                <a href="/edit2/{{Craftsmans.cId}}/">編輯二</a>
-                <a href="/delete/{{Craftsmans.cId}}/">刪除</a>
+                <a href="/edit/{{unit.cId}}/" title="編輯一">編輯一</a>
+                <a href="/edit2/{{unit.cId}}/load" title="編輯二">編輯二</a>
+                <a href="/delete/{{unit.cId}}/" title="刪除">刪除</a>
             </td>
         </tr>
         {% endfor %}
     </table>
 </form>
+<h3>v 1.2.1</h3>
 {% endblock %}

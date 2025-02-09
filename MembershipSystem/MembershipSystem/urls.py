@@ -31,7 +31,8 @@ urlpatterns = [
     re_path(r'^postform/$', views.postform),
     re_path(r'^delete/(\d+)/$', views.delete),
     re_path(r'^edit/(\d+)/$', views.edit),
-    re_path(r'^edit2/(\d+)/edit2/$', views.edit2),
+    re_path(r'^edit/(\d+)/(\w+)/$', views.edit),
+    re_path(r'^edit2/(\d+)/(\w+)/$', views.edit2),
     re_path(r'^login/$', views.login),
 
     ]

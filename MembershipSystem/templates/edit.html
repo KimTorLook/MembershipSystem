@@ -2,13 +2,14 @@
 {% block title %}<title>資料表修改</title>{% endblock %}
 {% block content %}
 <h2>員工資料修改</h2>
-<form action="/edit/{{unit.id}}/edit/" method="GET" name="form1">
+<form action="/edit/{{unit.cId}}/edit/" method="GET" name="form1">
 	<table border="1" cellspacing="1" cellpadding="4">
 	  <tr>
 		<th>姓名</th>
 		<td ><input type="text" id="cName" name="cName" value={{unit.cName}}></td>
 	  </tr>
-		<th>性別{{unit.cSex}}</th>
+	  <tr>
+		<th>性別</th>
 		{% if unit.cSex == "M" %}
 			<td >
 			  <input name="cSex" type="radio" id="cSex1" value="M" checked="checked" />男生

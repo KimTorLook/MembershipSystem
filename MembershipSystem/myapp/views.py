@@ -86,7 +86,7 @@ def delete(request, id=None):
         if request.method == "POST":
             id = request.POST['cId']
         try:
-            unit=Craftsman.objects.get(id=id)
+            unit=Craftsman.objects.get(cId=id)
             unit.delete()
             return redirect('/index/')
         except:
@@ -119,7 +119,26 @@ def edit(request, id=None, mode=None):
         return render(request, "edit.html", locals())
     
 def edit2(request, id=None, mode=None):
-        return render(request, "edit.html", locals())
+    if mode == "load":
+        unit = Craftsman.objects.get(cId=id)
+        strdate=str(unit.cBirthday)
+        strdate2=strdate.replace("年","-")
+        strdate2=strdate.replace("月","-")
+        strdate2=strdate.replace("日","-")
+        unit.cBirthday = strdate2
+        return render(request, "edit2.html", locals())
+    elif mode == "save":
+        unit = Craftsman.objects.get(cId=id)
+        unit.cName=request.POST["cName"]
+        unit.cSex=request.POST["cSex"]
+        unit.cBirthday=request.POST["cBirthday"]
+        unit.cEmail=request.POST["cEmail"]
+        unit.cPhone=request.POST["cPhone"]
+        unit.cAddr=request.POST["cAddr"]
+        unit.save()
+        message = '己修改...'
+        return redirect('/index/')
+    return render(request, "edit2.html", locals()) #自創
 
             
 
