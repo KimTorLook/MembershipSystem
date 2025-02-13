@@ -8,9 +8,9 @@ from myapp.form import PostForm
 def sayhello(request):
     return HttpResponse("Hello Django!")
 
-def index(request, id=None):
+def employeelist(request, id=None):
     craftsman = Craftsman.objects.all().order_by('cId')
-    return render(request, "index.html", locals())
+    return render(request, "employeelist.html", locals())
 
 def showpic(request):
     all_files = os.listdir('static\images')
@@ -26,7 +26,6 @@ def listall(request):
 def backstage(request):
     return render(request, "backstage.html", locals())
 
-#def index(request, username):
      
      
 
@@ -67,7 +66,7 @@ def post1(request):
             cAddr = postform.cleaned_data['cAddr']
             unit=Craftsman.objects.create(cId=cId, cName=cName, cSex=cSex, cBirthday=cBirthday, cEmail=cEmail, cPhone=cPhone, cAddr=cAddr)
             message = "己儲存..."
-            return redirect('/index/')
+            return redirect('/employeelist/')
         else:
             message = "驗證碼錯誤！"
     else:
@@ -88,7 +87,7 @@ def delete(request, id=None):
         try:
             unit=Craftsman.objects.get(cId=id)
             unit.delete()
-            return redirect('/index/')
+            return redirect('/employeelist/')
         except:
             messagew = "讀取錯誤"
     return render(request, "delete.html", locals())  
@@ -105,7 +104,7 @@ def edit(request, id=None, mode=None):
         unit.cAddr=request.GET.get('cAddr', unit.cAddr)
         unit.save()
         messagew = "己修改..."
-        return redirect('/index/')
+        return redirect('/employeelist/')
     else:
         try:
             unit = Craftsman.objects.get(cId=id)
@@ -137,12 +136,19 @@ def edit2(request, id=None, mode=None):
         unit.cAddr=request.POST["cAddr"]
         unit.save()
         message = '己修改...'
-        return redirect('/index/')
+        return redirect('/employeelist/')
     return render(request, "edit2.html", locals()) #自創
+
+def index(request, key, value, id):
+    try:
+        if User.object.session == True
+    except:
+        asdfas
+    return render(request, "index.html", locals())
 
             
 
 def login(request):
      
-     return render(request, "login.html", locals())
+    return render(request, "login.html", locals())
 
