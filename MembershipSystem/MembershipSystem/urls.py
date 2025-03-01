@@ -20,12 +20,15 @@ from myapp import views
 
 urlpatterns = [
     re_path(r'^admin', admin.site.urls),
-    re_path(r'^$', views.sayhello),
+    re_path(r'^$', views.index),
+    re_path(r'^index/$', views.index),
     re_path(r'^employeelist/$', views.employeelist),
     re_path(r'^test/(\w+)/$', views.test),
     re_path(r'^backstage/$', views.backstage),
     re_path(r'^showpic/$', views.showpic),
     re_path(r'^listall/$', views.listall),
+    re_path(r'^login/$', views.login),
+    re_path(r'^logout/$', views.logout),
     re_path(r'^post/$', views.post),
     re_path(r'^post1/$', views.post1),
     re_path(r'^postform/$', views.postform),
@@ -33,7 +36,5 @@ urlpatterns = [
     re_path(r'^edit/(\d+)/$', views.edit),
     re_path(r'^edit/(\d+)/(\w+)/$', views.edit),
     re_path(r'^edit2/(\d+)/(\w+)/$', views.edit2),
-    re_path(r'^index/$', views.index),
-    re_path(r'^login/$', views.login),
-
+    re_path(r'^adduser/$', views.adduser),
     ]
