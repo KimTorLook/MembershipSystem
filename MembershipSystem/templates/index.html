@@ -4,6 +4,7 @@
 <h1> 首頁</h1>
 {% if request.user.is_authenticated %}
     歡迎光臨︰{{user}}
+    <p><a href="/employeelist/">員工列表</a></p>
     <p><a href="/logout/">登出</a></p>
 {% else %}
     <p>您尚未登入喔！</p>

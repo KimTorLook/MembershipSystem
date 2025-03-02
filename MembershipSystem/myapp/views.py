@@ -156,12 +156,12 @@ def login(request):
     if request.method == 'POST':
         name = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(username="name", password = "password")
+        user = auth.authenticate(username=name, password = password)
         if user is not None:
             if user.is_active:
                 auth.login(request,user)
-                return redirect('/index/')
                 message = '登入成功！'
+                return redirect('/index/')
             else:
                 message = '帳號尚未啟用！'
         else:

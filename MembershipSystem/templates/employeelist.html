@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block title %}<title>新增員工表 </title>{% endblock %}
 {% block content %}
-<h2>顯示資料表所有資料 <a href="/post1/">新增員工</a></h2>
+<table border="0" cellspacing="0" cellpadding="4">
+    <tr><td><h2>顯示資料表所有資料 <a href="/post1/">新增員工</a></h2></td>
+        <td><a href="/logout/"><h2>登出</h2></a></td></tr>
+
+
 <form action="." method="POST" name="form1">
     {% csrf_token %}
     <table border="1" cellspacing="0" cellpadding="4">
@@ -20,5 +24,4 @@
         {% endfor %}
     </table>
 </form>
-<h3>v 1.2.1</h3>
 {% endblock %}
