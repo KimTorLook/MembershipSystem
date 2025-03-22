@@ -24,7 +24,6 @@ urlpatterns = [
     re_path(r'^index/$', views.index),
     re_path(r'^employeelist/$', views.employeelist),
     re_path(r'^test/(\w+)/$', views.test),
-    re_path(r'^backstage/$', views.backstage),
     re_path(r'^showpic/$', views.showpic),
     re_path(r'^listall/$', views.listall),
     re_path(r'^login/$', views.login),

@@ -12,24 +12,20 @@ def sayhello(request):
     return HttpResponse("Hello Django!")
 
 def employeelist(request, id=None):
-    craftsman = Craftsman.objects.all().order_by('cId')
+    craftsman = Craftsman.objects.all().order_by('cId')         #提取所有員工的資料
     return render(request, "employeelist.html", locals())
 
-def showpic(request):
+def showpic(request):                                           #沒有用
     all_files = os.listdir('static\images')
     return render(request, "showpic.html", locals())
 
-def listall(request):
+def listall(request):                                           #沒有用
     try:
         unit = Craftsman.objects.all().order_by('id')
     except:
         erromessage = "(erromessage)"
     return render(request, "listall.html", locals())
-
-def backstage(request):
-    return render(request, "backstage.html", locals())
-
-     
+  
      
 
 times = 0
@@ -48,7 +44,7 @@ def test(request, username):
     return render(request, "backstage.html", locals())
 
 
-def post(request):
+def post(request):                          #沒有用
     if request.method == "POST":
         mess=request.POST['username']
     else:
@@ -56,24 +52,24 @@ def post(request):
     return render(request, "post.html", locals())
 
 
-def post1(request):
-    if request.method == "POST":
-        postform = PostForm(request.POST)
-        if postform.is_valid():
+def post1(request):                         #新增員工表格
+    if request.method == "POST":            #先檢查方法
+        postform = PostForm(request.POST)   #將標頭的資料帶到postform作資料形別的驗證
+        if postform.is_valid():             #如果所有資通過驗證
             cId = postform.cleaned_data['cId']
             cName = postform.cleaned_data['cName']
             cSex = postform.cleaned_data['cSex']
             cBirthday = postform.cleaned_data['cBirthday']
             cEmail = postform.cleaned_data['cEmail']
             cPhone = postform.cleaned_data['cPhone']
-            cAddr = postform.cleaned_data['cAddr']
+            cAddr = postform.cleaned_data['cAddr']    #所有資料會儲存到資料庫中
             unit=Craftsman.objects.create(cId=cId, cName=cName, cSex=cSex, cBirthday=cBirthday, cEmail=cEmail, cPhone=cPhone, cAddr=cAddr)
             message = "己儲存..."
             return redirect('/employeelist/')
-        else:
+        else:                               #如果所有資通過驗證                
             message = "驗證碼錯誤！"
     else:
-        message = "姓名、性別、生日必須輸入！"
+        message = "姓名、性別、生日必須輸入！"  #如果進入網頁的方法不是post
         postform = PostForm(request.POST)
     return render(request, "post1.html", locals())
 
@@ -83,8 +79,8 @@ def postform(request):  #新增資料，資料必須驗證
     return render(request, "postform.html", locals())		
 
 
-def delete(request, id=None):
-    if id!=None:
+def delete(request, id=None):             #在employee網頁中可以刪除員工資料
+    if id!=None:                          #URL需要有員工ID
         if request.method == "POST":
             id = request.POST['cId']
         try:
@@ -92,13 +88,13 @@ def delete(request, id=None):
             unit.delete()
             return redirect('/employeelist/')
         except:
-            messagew = "讀取錯誤"
+            message = "讀取錯誤"
     return render(request, "delete.html", locals())  
 
 
 def edit(request, id=None, mode=None):
-    if mode == "edit":
-        unit=Craftsman.objects.get(cId=id)
+    if mode == "edit":                       #URL有第三個元素mode
+        unit=Craftsman.objects.get(cId=id)   #提取資料
         unit.cName=request.GET.get('cName', unit.cName)
         unit.cSex=request.GET.get('cSex', unit.cSex)
         unit.cBirthday=request.GET.get('cBirthday', unit.cBirthday)
@@ -106,13 +102,13 @@ def edit(request, id=None, mode=None):
         unit.cPhone=request.GET.get('cPhone', unit.cPhone)
         unit.cAddr=request.GET.get('cAddr', unit.cAddr)
         unit.save()
-        messagew = "己修改..."
+        message = "己修改..."
         return redirect('/employeelist/')
     else:
         try:
             unit = Craftsman.objects.get(cId=id)
             strdate=str(unit.cBirthday)
-            strdate2=strdate.replace("年","-")
+            strdate2=strdate.replace("年","-")   #更改日期的格式
             strdate2=strdate.replace("月","-")
             strdate2=strdate.replace("日","-")
             unit.cBirthday = strdate2
@@ -143,22 +139,22 @@ def edit2(request, id=None, mode=None):
     return render(request, "edit2.html", locals()) #自創
 
 def index(request):
-    try:
+    try:                    #這個try except沒有用
         if User.objects.session == True:
             pass
     except:
-        pass #return redirect("/login/")
+        pass                                   
     return render(request, "index.html", locals())
 
             
 
 def login(request):
-    if request.method == 'POST':
+    if request.method == 'POST':                    #先驗查方法
         name = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(username=name, password = password)
-        if user is not None:
-            if user.is_active:
+        user = auth.authenticate(username=name, password = password)  #核對帳密
+        if user is not None:                        #核對成功時
+            if user.is_active:                      #驗查用戶是否活躍
                 auth.login(request,user)
                 message = '登入成功！'
                 return redirect('/index/')
@@ -173,7 +169,7 @@ def logout(request):
     return redirect("/index/")
     
 
-def adduser(request):
+def adduser(request):              #沒有用     
     try:
         user=User.objects.get(username="test")
     except:
